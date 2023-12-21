@@ -20,14 +20,15 @@ Both Sentry and Ntfy can be self-hosted on [any cloud server](https://www.vpsbg.
 
 ## Setup
 ### 1. Integration registration
-You need to create a new Sentry integration. Navigate to: **Settings >> Integrations >> Create new integration >> Internal integration**.
+You need to create a new Sentry integration.  
+Navigate to: **Settings >> Integrations >> Create new integration >> Internal integration**.
 1. Set a name.
-2. The webhook is the URL to the server where you will host this software. This software by default listens on port 5000 and expects a POST request to /webhook endpoint. 
-    Example: http://SERVER_IP:5000/webhook
-3. Give "Read" permissions to "Issue & Event".
-4. In the "Webhook" section, check the "Issue" section.
-5. Save the integration.
-6. Open the integration and find the section "Credentials" and copy the "Client Secret". You will need to put this secret key in the `.env` file.
+2. The webhook is the URL to the server where you will host this software. This software by default listens on port 5000 and expects a POST request to /webhook endpoint.  
+For example: **http://SERVER_IP:5000/webhook**
+4. Give "Read" permissions to "Issue & Event".
+5. In the "Webhook" section, check the "Issue" section.
+6. Save the integration.
+7. Open the integration and find the section "Credentials" and copy the "Client Secret". You will need to put this secret key in the `.env` file.
 
 
 ### 2. Setup
