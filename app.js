@@ -6,7 +6,7 @@ const btoa = require('btoa');
 const crypto = require("crypto");
 
 const app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' }));
 
 const ntfyUrl = process.env.NTFY_URL;
 const username = process.env.NTFY_USERNAME;
@@ -21,7 +21,7 @@ function verifySignature(request, secret = "") {
 }
 
 app.post('/webhook', async (req, res) => {
-  if (req.headers['sentry-hook-resource'] !== 'issue') {
+  if (req.headers['sentry-hook-resource'] !== 'event_alert') {
     return res.status(403).send('Forbidden: Invalid resource type.');
   }
 
@@ -30,12 +30,14 @@ app.post('/webhook', async (req, res) => {
   }
 
   try {
-    const title = req.body.data.issue.title;
-    const bodyMessage = req.body.data.issue.culprit;
+    const title = req.body.data.event.title;
+    const bodyMessage = req.body.data.event.culprit;
+    const issueUrl = req.body.data.event.web_url;
 
     const headers = {
       'Title': title,
       'Tags': 'beetle',
+      'Click': issueUrl
     };
 
     if (username && password) {
